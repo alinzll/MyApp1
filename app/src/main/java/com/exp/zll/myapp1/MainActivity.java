@@ -27,10 +27,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,Main2Activity.class);
-                i.putExtra("name","张琳琳");
+                //i.putExtra("name","张琳琳");                     //传递单个参数
+                //传递数据包
+                /*Bundle b = new Bundle();
+                b.putString("name","aliy");
+                b.putInt("age",14);
+                i.putExtras(b);*/
+
+                //传递一个值对象，两种序列化对象的接口，1是Serializable，2是
+                i.putExtra("user",new User("aliff",2));
                 startActivity(i);
             }
         });
+
     }
     //实现监听器的接口
     class ButtonListener implements View.OnClickListener {
