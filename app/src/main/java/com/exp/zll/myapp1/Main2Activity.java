@@ -6,15 +6,34 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Main2Activity extends AppCompatActivity {
     private TextView textView;
+    private EditText editTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         textView = (TextView) findViewById(R.id.textView);
+
+        //获得activity的返回数据
+        editTxt = (EditText) findViewById(R.id.nametxt);
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i1 = new Intent();
+                i1.putExtra("data",editTxt.getText().toString());
+                setResult(1,i1);
+                finish();
+            }
+        });
+
+
+
+
+
         //接收上一个页面的数据
         Intent i = getIntent();
         //接收数据包
@@ -28,7 +47,7 @@ public class Main2Activity extends AppCompatActivity {
         //接收值对象的值，Parcelable
         User user = (User) i.getParcelableExtra("user");
 
-        textView.setText(String.format("User info(name=%s,age=%d)",user.getName(),user.getAge()));
+        //textView.setText(String.format("User info(name=%s,age=%d)",user.getName(),user.getAge()));
 
         //底部的邮件按钮效果
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

@@ -11,11 +11,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private Button btn1;
     private Button btn2;
+    private TextView txt1;
     int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        txt1 = (TextView) findViewById(R.id.text);
+
+
 
         textView = (TextView)findViewById(R.id.main_title);     //获取文本对象
         textView.setText("张琳琳，你好！");                       //设置成员变量的值
@@ -35,12 +40,20 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtras(b);*/
 
                 //传递一个值对象，两种序列化对象的接口，1是Serializable，2是
-                i.putExtra("user",new User("aliff",2));
-                startActivity(i);
+                //i.putExtra("user",new User("aliff",2));
+                //startActivity(i);
+                startActivityForResult(i,0);        //获取另一个页面的返回数据
             }
         });
 
     }
+    //重写返回数据后的方法
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        txt1.setText("另一个activity返回的数据是："+data.getStringExtra("data"));
+    }
+
     //实现监听器的接口
     class ButtonListener implements View.OnClickListener {
         @Override
